@@ -37,4 +37,3 @@ int index(SString s , SString T){
     else 
         return 0;
 }
-////答第hi法海hi哈哈打完发哈我发hi哦
