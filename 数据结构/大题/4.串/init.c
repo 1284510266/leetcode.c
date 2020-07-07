@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
-#include<string>
+#include<string.h>
+
 //串的实际长度只能小于MAX，两种表示方法 一，额外变量放串的长度 二，在串后面加一个'\0'此时串长为隐含值
 //顺序表
 #define MAX 255
@@ -38,3 +39,44 @@ int index(SString s , SString T){
         return 0;
 }
 //尝试
+//经过书上的例题，写出一个求next[]数组的程序
+//前提:已知匹配字符串T
+void get_next(SString T , int next[]){
+    int i = 1;   //字符串下标
+    int j = 0;   //数组的下标
+    next[1] = 0;
+    while(i < T.length){ 
+        if(j == 0 || T.ch[i] == T.ch[j]){
+            i++;
+            j++;
+            next[i] = j;
+            //if pi = pj next[j+1] = next[j]+1;
+        }
+        else{
+            j = next[j];
+        }
+    }
+}
+
+//kmp算法
+int index_kmp(SString S,SString T,int next[]){
+    int i = 1 ;
+    int j = 1 ;
+    while (i <= S.length && j <= T.length)
+    {
+        //匹配成功则继续向后比较
+        if(j == 0 || S.ch[i] == T.ch[j]){   
+            i++;
+            j++;
+        }
+        //反之 则从next[j]处开始匹配，这种kmp算法减少了回溯次数
+        else{
+            j = next[j];
+        }
+    }
+    if(j > T.length)
+        return i-T.length;
+    else
+        return 0;
+}
+//时间复杂度 O（m+n）
