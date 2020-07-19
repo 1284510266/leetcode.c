@@ -8,10 +8,16 @@
 int MIN(int a ,int b){
     return a>b? b:a;
 }
-
+int compare(const void *a,const void *b){
+    return *(int*)a - *(int*)b;
+}
 int threeSumClosest(int* nums, int numsSize, int target){
     //排序
-    
+    qsort(nums,numsSize,sizeof(int),compare);
+
+    int head;
+    int left;
+    int right;
     // //双指针咋弄三个值呢？
     // //一个想法是：固定一个指针，初值为nums[0]
     // //双指针在固定指针的右边扫描，找出比sub值小的三数和，直至扫描完第一组
