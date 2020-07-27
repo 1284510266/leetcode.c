@@ -9,13 +9,17 @@
 
 
 typedef struct {
-
+    int front;
+    int rear;
+    int val;
 } MinStack;
 
 /** initialize your data structure here. */
-
 MinStack* minStackCreate() {
-
+    
+    obj->front = 0;
+    obj->rear = 0;
+    obj->val = 0;
 }
 
 void minStackPush(MinStack* obj, int x) {
